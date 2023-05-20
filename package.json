@@ -9,7 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "swagger": "node swagger.js"
+    "swagger": "node swagger.js",
+    "tsc": "tsc"
+
   },
   "keywords": [],
   "author": "",
@@ -22,8 +24,11 @@
     "nodemon": "^2.0.22",
     "swagger": "^0.0.1",
     "swagger-autogen": "^2.23.1",
-    "swagger-ui-express": "^4.6.3",
-    "typescript": "^5.0.4"
+    "swagger-ui-express": "^4.6.3"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "typescript": "^5.0.4"
+  }
 }
