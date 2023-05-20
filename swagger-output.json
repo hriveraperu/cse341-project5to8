@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "description": "Description",
+    "title": "Contact Card API",
+    "description": "API to storage contact cards",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-project5to8.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/api-docs": {
