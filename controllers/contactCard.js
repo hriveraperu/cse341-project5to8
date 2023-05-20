@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 const getAll = async (req, res, next) => {
     const result = await mongodb
     .getDb()
-    //.db('CSE341')
+    .db('CSE341Project')
     .collection('contactCard')
     .find();
     result.toArray().then((lists) => {
@@ -17,7 +17,7 @@ const getSingle = async (req, res, next) => {
   const userId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
-    //.db('CSE341')
+    .db('CSE341Project')
     .collection('contactCard')
     .find({ _id: userId });
   result.toArray().then((lists) => {
@@ -41,7 +41,7 @@ const addContacts = async (req, res) => {
   };
   const response = await mongodb
     .getDb()
-    //.db('CSE341')
+    .db('CSE341Project')
     .collection('contactCard')
     .insertOne(contact);
   if (response.acknowledged) {
@@ -67,7 +67,7 @@ const updateContacts = async (req, res) => {
   };
   const response = await mongodb
           .getDb()
-          //.db('CSE341')
+          .db('CSE341Project')
           .collection('contactCard')
           .replaceOne({ _id: userId }, contact);
   // console.log(response);
@@ -82,7 +82,7 @@ const deleteContacts = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const response = await mongodb
     .getDb()
-    .db('CSE341')
+    .db('CSE341Project')
     .collection('contacts')
     .deleteOne({ _id: userId }, true);
   // console.log(response);
