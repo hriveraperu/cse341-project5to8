@@ -83,7 +83,7 @@ const deleteContacts = async (req, res) => {
   const response = await mongodb
     .getDb()
     .db('CSE341Project')
-    .collection('contacts')
+    .collection('contactCard')
     .deleteOne({ _id: userId }, true);
   // console.log(response);
   if (response.deletedCount > 0) {
