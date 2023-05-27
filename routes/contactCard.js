@@ -2,7 +2,7 @@ const express = require('express');
 var router = express.Router();
 
 const contactCardController = require('../controllers/contactCard');
-const validation = require('../middleware/validation');
+const validation = require('../middleware/validator');
 
 router.get('/', contactCardController.getAll);
 

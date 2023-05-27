@@ -1,4 +1,4 @@
-const validation = require('../helpers/validation');
+const validation = require('../helpers/validator');
 
 const saveContact = (req, res, next) => {
     const validationRule = {
