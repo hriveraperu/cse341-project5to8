@@ -8,7 +8,7 @@ const doc = {
     description: 'API to storage contact cards',
   },
   host: 'cse341-project5to8.onrender.com',
-  schemes: ['https'],
+  schemes: ['https']
   // host: 'localhost:8080',
   // schemes: ['http'],
 };

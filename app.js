@@ -27,9 +27,9 @@ app
         next();
     });
 
-process.on('uncaughtException', (err, origin) => {
-    console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception on: ${origin}`);
-});
+// process.on('uncaughtException', (err, origin) => {
+//     console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception on: ${origin}`);
+// });
 
 
 //SWAGGER

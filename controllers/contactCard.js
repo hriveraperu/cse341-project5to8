@@ -17,9 +17,9 @@ const getAll = async (req, res, next) => {
   };
   
 const getSingle = async (req, res, next) => {
-  if(!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('You must use a valid ID to find a contact');
-  }
+  // if(!ObjectId.isValid(req.params.id)) {
+  //   res.status(400).json('You must use a valid ID to find a contact');
+  // }
   const userId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -27,9 +27,9 @@ const getSingle = async (req, res, next) => {
     .collection('contactCard')
     .find({ _id: userId });
   result.toArray((err, lists) => {
-    if (err) {
-      res.status(400).json({ message: err});
-    }
+    // if (err) {
+    //   res.status(400).json({ message: err});
+    // }
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
   });
@@ -61,9 +61,9 @@ const addContacts = async (req, res) => {
 };
 
 const updateContacts = async (req, res) => {
-  if(!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('You must use a valid ID to update a contact');
-  }
+  // if(!ObjectId.isValid(req.params.id)) {
+  //   res.status(400).json('You must use a valid ID to update a contact');
+  // }
   const userId = new ObjectId(req.params.id);
   
   const contact = {
@@ -91,9 +91,9 @@ const updateContacts = async (req, res) => {
 };
 
 const deleteContacts = async (req, res) => {
-  if(!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('You must use a valid ID to delete a contact');
-  }
+  // if(!ObjectId.isValid(req.params.id)) {
+  //   res.status(400).json('You must use a valid ID to delete a contact');
+  // }
   const userId = new ObjectId(req.params.id);
   const response = await mongodb
     .getDb()
