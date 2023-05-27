@@ -5,22 +5,22 @@
     "description": "API to storage contact cards",
     "version": "1.0.0"
   },
-  "host": "cse341-project5to8.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "<h2>Path to check API documentation and usage</h2>",
         "parameters": [],
         "responses": {}
       }
     },
     "/contactCard/": {
       "get": {
-        "description": "",
+        "description": "<h2>Get all the contact cards information</h2>",
         "produces": [
           "application/json"
         ],

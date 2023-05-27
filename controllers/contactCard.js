@@ -7,20 +7,29 @@ const getAll = async (req, res, next) => {
     .db('CSE341Project')
     .collection('contactCard')
     .find();
-    result.toArray().then((lists) => {
+    result.toArray((err, lists) => {
+      if(err) {
+        res.status(400).json({ message: err });
+      }
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     });
   };
   
 const getSingle = async (req, res, next) => {
+  if(!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('You must use a valid ID to find a contact');
+  }
   const userId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
     .db('CSE341Project')
     .collection('contactCard')
     .find({ _id: userId });
-  result.toArray().then((lists) => {
+  result.toArray((err, lists) => {
+    if (err) {
+      res.status(400).json({ message: err});
+    }
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
   });
@@ -52,6 +61,9 @@ const addContacts = async (req, res) => {
 };
 
 const updateContacts = async (req, res) => {
+  if(!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('You must use a valid ID to update a contact');
+  }
   const userId = new ObjectId(req.params.id);
   
   const contact = {
@@ -72,13 +84,16 @@ const updateContacts = async (req, res) => {
           .replaceOne({ _id: userId }, contact);
   // console.log(response);
   if (response.modifiedCount > 0) {
-          res.status(204).send(response || 'Contact Card modified successfully');
+    res.status(204).send(response || 'Contact Card modified successfully');
   } else {
-          res.status(500).json(response.error || 'Error: Contact Card was not updated');
+    res.status(500).json(response.error || 'Error: Contact Card was not updated');
   }
 };
 
 const deleteContacts = async (req, res) => {
+  if(!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('You must use a valid ID to delete a contact');
+  }
   const userId = new ObjectId(req.params.id);
   const response = await mongodb
     .getDb()
@@ -87,7 +102,7 @@ const deleteContacts = async (req, res) => {
     .deleteOne({ _id: userId }, true);
   // console.log(response);
   if (response.deletedCount > 0) {
-          res.status(200).send(response || 'Contact Card Deleted Successfully');
+          res.status(204).send(response || 'Contact Card Deleted Successfully');
   } else {
           res.status(500).json(response.error || 'Error: Contact Card was not deleted');
   }

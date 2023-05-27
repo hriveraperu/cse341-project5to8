@@ -2,14 +2,17 @@ const express = require('express');
 var router = express.Router();
 
 const contactCardController = require('../controllers/contactCard');
+const validation = require('../middleware/validation');
 
 router.get('/', contactCardController.getAll);
 
 router.get('/:id', contactCardController.getSingle);
 
-router.post('/', contactCardController.addContacts);
+router.post('/', validation.saveContact, contactCardController.addContacts);
 
-router.delete('/:id', contactCardController.deleteContacts);
+router.put('/:id', validation.saveContact, contactCardController.updateContacts);
+
+router.delete('/:id',  contactCardController.deleteContacts);
 
 
 module.exports = router;

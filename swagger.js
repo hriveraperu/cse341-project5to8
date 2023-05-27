@@ -1,3 +1,5 @@
+// const { describe } = require('node:test');
+
 const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
