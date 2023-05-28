@@ -7,10 +7,10 @@ const doc = {
     title: 'Contact Card API',
     description: 'API to storage contact cards',
   },
-  // host: 'cse341-project5to8.onrender.com',
-  // schemes: ['https']
-  host: 'localhost:8080',
-  schemes: ['http']
+  host: 'cse341-project5to8.onrender.com',
+  schemes: ['https']
+  // host: 'localhost:8080',
+  // schemes: ['http']
 };
 
 const outputFile = './swagger-output.json';
