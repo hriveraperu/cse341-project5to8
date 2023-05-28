@@ -22,10 +22,10 @@ const getAll = async (req, res, next) => {
   const result = await mongodb
   .getDb()
   .db('CSE341')
-  .collection('contacts')
-  .find();
+  .collection('contacts');
+  
   try{
-    result.toArray().then((lists) => {
+    result.find().toArray().then((lists) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     });
@@ -42,10 +42,9 @@ const getSingle = async (req, res, next) => {
   const result = await mongodb
     .getDb()
     .db('CSE341Project')
-    .collection('contactCard')
-    .find({ _id: userId });
+    .collection('contactCard');
   try{
-    result.toArray().then((lists) => {
+    result.find({ _id: userId }).toArray().then((lists) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists[0]);
       });
