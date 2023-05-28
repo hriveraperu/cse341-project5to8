@@ -21,7 +21,7 @@ const ObjectId = require('mongodb').ObjectId;
 const getAll = async (req, res, next) => {
   const result = await mongodb
   .getDb()
-  .db('CSE341')
+  .db('CSE341Project')
   .collection('contacts');
   
   try{
