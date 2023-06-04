@@ -5,6 +5,7 @@ const port = process.env.PORT || 8080;
 const cors = require('cors');
 const passport = require('passport')
 const session = require('express-session')
+const path = require('path')
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
@@ -16,14 +17,19 @@ require('./controllers/google-oauth.js')
 
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'thissession',
     resave: false,
-    saveUninitialized: false
-}))
+    saveUninitialized: true,
+    cookie: { secure: false}
+}));
 
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use(express.static(path.join(__dirname, 'client')));
+app.get('/', (req, res) => {
+    res.sendFile('index.html');
+});
 
 app
     .use(cors())
@@ -49,6 +55,9 @@ process.on('uncaughtException', (err, origin) => {
 
 //SWAGGER
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
+//Home
 
 
 // Connect DB
