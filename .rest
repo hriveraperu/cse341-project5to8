@@ -10,7 +10,7 @@ GET http://localhost:8080/api-docs/ HTTP/1.1
 
 ###
 
-GET http://localhost:8080/contacts/644dc9add236c39355fc6c06 HTTP/1.1
+GET http://localhost:8080/contactCard/646948de50fe0416c8746ce3 HTTP/1.1
 
 ###
 

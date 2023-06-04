@@ -3,12 +3,27 @@ const app = express();
 const mongodb = require('./db/connection');
 const port = process.env.PORT || 8080;
 const cors = require('cors');
+const passport = require('passport')
+const session = require('express-session')
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
 
 
 const bodyParser = require('body-parser');
+
+require('./controllers/google-oauth.js')(passport)
+
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app
     .use(cors())
