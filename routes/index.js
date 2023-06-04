@@ -4,6 +4,6 @@ const user = require('./user');
 
 routes.use('/', require('./swagger'));
 routes.use('/contactCard', contactCard);
-routes.use('/auth/google', user);
+routes.use('/auth', user);
 
 module.exports = routes;

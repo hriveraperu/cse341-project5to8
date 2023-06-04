@@ -12,7 +12,7 @@ const swaggerDocument = require('./swagger-output.json');
 
 const bodyParser = require('body-parser');
 
-require('./controllers/google-oauth.js')(passport)
+require('./controllers/google-oauth.js')
 
 
 app.use(session({
