@@ -13,7 +13,7 @@ const initDb = (callback: any) => {
 
     const mongoURI = process.env.MONGODB_URI;
     if(!mongoURI) {
-        throw Error('MongoDB URI Not found in environment variables');
+        throw Error('MONGODB_URI Not found in environment variables');
     }
 
     MongoClient.connect(mongoURI)
