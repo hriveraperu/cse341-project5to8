@@ -1,31 +1,14 @@
-const { isEmptyBindingElement } = require('typescript');
-const mongodb = require('../db/connection');
-const ObjectId = require('mongodb').ObjectId;
+import { Request, Response } from 'express';
+import { getDb } from "../db/connection";
+import { ObjectId } from 'mongodb';
 
-// const getAll = (req, res, next) => {
-//   const result = mongodb
-//   .getDb()
-//   .db('CSE341Project')
-//   .collection('contacts')
-//   .find();
-//   result.toArray((err,lists) => {
-//     if (err) {
-//       res.status(400).json("");
-//     };
-//     res.setHeader('Content-Type', 'application/json');
-//     res.status(200).json(lists);
-//   });
-// };
-
-
-const getAll = async (req, res, next) => {
-  const result = await mongodb
-  .getDb()
-  .db('CSE341Project')
-  .collection('contacts');
+const getAll = async (req: Request, res: Response): Promise<void> => {
+  const result = await getDb()
+  //.db('CSE341Project')
+  .collection('contactCard');
   
   try{
-    result.find().toArray().then((lists) => {
+    result.find().toArray().then((lists: unknown) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     });
@@ -34,17 +17,16 @@ const getAll = async (req, res, next) => {
     };
   };
   
-const getSingle = async (req, res, next) => {
+const getSingle = async (req: Request, res: Response): Promise<void> => {
   if(!ObjectId.isValid(req.params.id)) {
     res.status(400).json('You must use a valid ID to find a contact');
   }
   const userId = new ObjectId(req.params.id);
-  const result = await mongodb
-    .getDb()
-    .db('CSE341Project')
+  const result = await getDb()
+    //.db('CSE341Project')
     .collection('contactCard');
   try{
-    result.find({ _id: userId }).toArray().then((lists) => {
+    result.find({ _id: userId }).toArray().then((lists: unknown[]) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists[0]);
       });
@@ -55,7 +37,7 @@ const getSingle = async (req, res, next) => {
 
 
 
-const addContacts = async (req, res) => {
+const addContacts = async (req: Request, res: Response): Promise<void> => {
   const contact = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -68,19 +50,18 @@ const addContacts = async (req, res) => {
     website: req.body.website
     
   };
-  const response = await mongodb
-    .getDb()
-    .db('CSE341Project')
+  const response = await getDb()
+    //.db('CSE341Project')
     .collection('contactCard')
     .insertOne(contact);
   if (response.acknowledged) {
           res.status(201).json(response);
   } else {
-          res.status(500).json(response.error || 'Error: Contact Card was not created');
+          res.status(500).send(response || 'Error: Contact Card was not created');
   }
 };
 
-const updateContacts = async (req, res) => {
+const updateContacts = async (req: Request, res: Response): Promise<void> => {
   if(!ObjectId.isValid(req.params.id)) {
     res.status(400).json('You must use a valid ID to update a contact');
   }
@@ -97,34 +78,32 @@ const updateContacts = async (req, res) => {
     country: req.body.country,
     website: req.body.website
   };
-  const response = await mongodb
-          .getDb()
-          .db('CSE341Project')
+  const response = await getDb()
+          //.db('CSE341Project')
           .collection('contactCard')
           .replaceOne({ _id: userId }, contact);
   // console.log(response);
   if (response.modifiedCount > 0) {
     res.status(204).send(response || 'Contact Card modified successfully');
   } else {
-    res.status(500).json(response.error || 'Error: Contact Card was not updated');
+    res.status(500).send(response || 'Error: Contact Card was not updated');
   }
 };
 
-const deleteContacts = async (req, res) => {
+const deleteContacts = async (req: Request, res: Response) => {
   if(!ObjectId.isValid(req.params.id)) {
     res.status(400).json('You must use a valid ID to delete a contact');
   }
   const userId = new ObjectId(req.params.id);
-  const response = await mongodb
-    .getDb()
-    .db('CSE341Project')
+  const response = await getDb()
+    //.db('CSE341Project')
     .collection('contactCard')
-    .deleteOne({ _id: userId }, true);
+    .deleteOne({ _id: userId });
   // console.log(response);
   if (response.deletedCount > 0) {
           res.status(204).send(response || 'Contact Card Deleted Successfully');
   } else {
-          res.status(500).json(response.error || 'Error: Contact Card was not deleted');
+          res.status(500).send(response || 'Error: Contact Card was not deleted');
   }
 };
 

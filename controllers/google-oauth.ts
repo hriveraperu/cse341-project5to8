@@ -1,23 +1,23 @@
-const passport = require('passport')
+const passportg = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 require('dotenv').config()
 
-passport.use(new GoogleStrategy({
+passportg.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "https://cse341-project5to8.onrender.com/auth/google/callback",
     passReqToCallback: true
 },
-    function(request, accessToken, refreshToken, profile, done) {
+    function(_request: any, accessToken: any, refreshToken: any, profile: any, done: (arg0: null, arg1: any) => void) {
         done(null, profile);
     }
 ));
 
-passport.serializeUser((user,done) => {
+passportg.serializeUser((user: any,done: (arg0: null, arg1: any) => void) => {
     done(null, user);
 });
 
-passport.deserializeUser((user,done) => {
+passportg.deserializeUser((user: any,done: (arg0: null, arg1: any) => void) => {
     done(null, user);
 })

@@ -1,10 +1,10 @@
-const express = require('express');
-const app = express();
+const expressApp = require('express');
+const app = expressApp();
 const mongodb = require('./db/connection');
 const port = process.env.PORT || 8080;
 const cors = require('cors');
-const passport = require('passport')
-const session = require('express-session')
+const passportApp = require('passport')
+const sessionApp = require('express-session')
 const path = require('path')
 
 const swaggerUi = require('swagger-ui-express');
@@ -13,31 +13,31 @@ const swaggerDocument = require('./swagger-output.json');
 
 const bodyParser = require('body-parser');
 
-require('./controllers/google-oauth.js')
+require('./controllers/google-oauth.ts')
 
 
-app.use(session({
+app.use(sessionApp({
     secret: 'thissession',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false}
 }));
 
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passportApp.initialize())
+app.use(passportApp.session())
 
-app.use(express.static(path.join(__dirname, 'client')));
-app.get('/', (req, res) => {
+app.use(expressApp.static(path.join(__dirname, 'client')));
+app.get('/', (req: any, res: { sendFile: (arg0: string) => void; }) => {
     res.sendFile('index.html');
 });
 
 app
     .use(cors())
-    .use(express.json())
-    .use(express.urlencoded({ extended: true }))
+    .use(expressApp.json())
+    .use(expressApp.urlencoded({ extended: true }))
     .use('/', require('./routes'))
     .use(bodyParser.json())
-    .use((req, res, next) => {
+    .use((req: any, res: any, next: any) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader(
             'Access-Control-Allow-Headers',
@@ -61,7 +61,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 // Connect DB
-mongodb.initDb((err, mongodb) => {
+mongodb.initDb((err: any, mongodb: any) => {
   if (err) {
       console.log(err);
   } else {

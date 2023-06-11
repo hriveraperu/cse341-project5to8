@@ -5,13 +5,13 @@
     "npm": "^9.5.0"
   },
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
-    "swagger": "node swagger.js",
+    "start": "nodemon app.ts",
+    "swagger": "node swagger.ts",
     "tsc": "tsc",
-    "dev": "ts-node-dev app.js"
+    "dev": "ts-node-dev app.ts"
   },
   "keywords": [],
   "author": "",
