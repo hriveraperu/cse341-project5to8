@@ -1,6 +1,7 @@
-const validation = require('../helpers/validation');
+import { Request, Response, NextFunction } from 'express';
+import validation from '../helpers/validation';
 
-const saveContact = (req, res, next) => {
+const saveContact = (req: Request, res: Response, next: NextFunction) => {
     const validationRule = {
         firstName: 'required|string',
         lastName: 'required|string',
@@ -11,9 +12,9 @@ const saveContact = (req, res, next) => {
         country: 'required|string',
         website: 'required|string',
     };
-    validation(req.body, validationRule, {}, (err,status) => {
+    validation(req.body, validationRule, {}, (err: any,status: boolean) => {
         if (!status) {
-            res.status(412).send({
+            res.status(412).json({
                 success: false,
                 message: 'Validation failed, try again',
                 data: err
@@ -24,6 +25,6 @@ const saveContact = (req, res, next) => {
     });
 };
 
-module.exports = {
+export {
     saveContact
 };
