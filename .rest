@@ -14,10 +14,10 @@ GET http://localhost:8080/contactCard/646948de50fe0416c8746ce3 HTTP/1.1
 
 ###
 
-GET https://cse341-hrivera.onrender.com/ HTTP/1.1
+GET https://cse341-project5to8.onrender.com/ HTTP/1.1
 
 ###
 
-GET https://cse341-hrivera.onrender.com/contacts/ HTTP/1.1
+GET https://cse341-project5to8.onrender.com/contactCard/ HTTP/1.1
 
 ###

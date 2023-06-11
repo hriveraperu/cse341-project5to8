@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { getDb } from "../db/connection";
 import { ObjectId } from 'mongodb';
 
-const getAll = async (req: Request, res: Response): Promise<void> => {
+export const getAll = async (req: Request, res: Response): Promise<void> => {
   const result = await getDb()
   //.db('CSE341Project')
   .collection('contactCard');
@@ -17,7 +17,7 @@ const getAll = async (req: Request, res: Response): Promise<void> => {
     };
   };
   
-const getSingle = async (req: Request, res: Response): Promise<void> => {
+export const getSingle = async (req: Request, res: Response): Promise<void> => {
   if(!ObjectId.isValid(req.params.id)) {
     res.status(400).json('You must use a valid ID to find a contact');
   }
@@ -37,7 +37,7 @@ const getSingle = async (req: Request, res: Response): Promise<void> => {
 
 
 
-const addContacts = async (req: Request, res: Response): Promise<void> => {
+export const addContacts = async (req: Request, res: Response): Promise<void> => {
   const contact = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -61,7 +61,7 @@ const addContacts = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const updateContacts = async (req: Request, res: Response): Promise<void> => {
+export const updateContacts = async (req: Request, res: Response): Promise<void> => {
   if(!ObjectId.isValid(req.params.id)) {
     res.status(400).json('You must use a valid ID to update a contact');
   }
@@ -90,7 +90,7 @@ const updateContacts = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const deleteContacts = async (req: Request, res: Response) => {
+export const deleteContacts = async (req: Request, res: Response) => {
   if(!ObjectId.isValid(req.params.id)) {
     res.status(400).json('You must use a valid ID to delete a contact');
   }
@@ -107,10 +107,10 @@ const deleteContacts = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = {
-  getAll,
-  getSingle,
-  addContacts,
-  updateContacts,
-  deleteContacts
-};
+// module.exports = {
+//   getAll,
+//   getSingle,
+//   addContacts,
+//   updateContacts,
+//   deleteContacts
+// };
