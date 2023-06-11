@@ -8,7 +8,7 @@ export const getAll = async (req: Request, res: Response): Promise<void> => {
   .collection('contactCard');
   
   try{
-    result.find().toArray().then((lists: unknown) => {
+    result.find().toArray().then((lists: unknown[]) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     });
