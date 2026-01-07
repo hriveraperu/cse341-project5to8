@@ -10,7 +10,8 @@ const sessionApp = require('express-session')
 const path = require('path')
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger-output.json');
+const swaggerDocument = require(path.join(process.cwd(), 'swagger-output.json'));
+
 
 
 const bodyParser = require('body-parser');
