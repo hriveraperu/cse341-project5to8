@@ -5,14 +5,14 @@
     "npm": "^9.5.0"
   },
   "version": "1.0.0",
-  "main": "app.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.ts",
-    "swagger": "node swagger.ts",
-    "tsc": "tsc",
-    "dev": "ts-node-dev app.ts"
-  },
+
+  "main": "dist/app.js",
+"scripts": {
+  "build": "tsc",
+  "start": "node dist/app.js",
+  "dev": "ts-node-dev app.ts",
+  "swagger": "ts-node-dev swagger.ts"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
