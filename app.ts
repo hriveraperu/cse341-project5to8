@@ -30,7 +30,7 @@ app.use(sessionApp({
 app.use(passportApp.initialize())
 app.use(passportApp.session())
 
-require('./controllers/google-oauth.ts')
+require('./controllers/google-oauth')
 
 app.use(expressApp.static(path.join(__dirname, 'client')));
 app.get('/', (req: any, res: { sendFile: (arg0: string) => void; }) => {
